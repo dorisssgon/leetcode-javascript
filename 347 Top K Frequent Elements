@@ -1,0 +1,30 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+
+var topKFrequent = function(nums, k) {
+    var result = [];
+    var record = {};
+    // put all element in a object
+    for(var i = 0; i< nums.length; i++){
+        if(record[nums[i]] !=null) {
+            record[+nums[i]] = ++record[nums[i]];
+        }else {
+            record[+nums[i]] = 1;
+        }
+    }
+    //sort order in object
+    var res = Object.keys(record).sort(
+        function(a,b){
+            return record[b] - record[a];
+        }
+    );
+    get the top k elements, and turn string to number.
+    result = res.splice(0,k).map(function(num){  
+        return +num;  
+    })
+    
+    return result;
+};
